@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Contagem Regressiva - 2 de agosto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Comfortaa', cursive;
+      background-color: #f9f9f9;
+      color: #333;
+      text-align: center;
+      padding-top: 100px;
+      font-size: 2em;
+    }
+
+    .timer {
+      margin-top: 40px;
+    }
+
+    .timer span {
+      display: inline-block;
+      min-width: 80px;
+      background-color: #333;
+      color: #fff;
+      padding: 15px;
+      margin: 10px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="timer">
+    <span id="days">00</span>
+    <span id="hours">00</span>
+    <span id="minutes">00</span>
+    <span id="seconds">00</span>
+  </div>
+
+  <script>
+    const targetDate = new Date("2025-08-02T00:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = String(days).padStart(2, '0');
+      document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+      document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+      document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+
+      if (distance < 0) {
+        clearInterval(interval);
+        document.querySelector('.timer').innerHTML = "00 00 00 00";
+      }
+    }
+
+    const interval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
+
