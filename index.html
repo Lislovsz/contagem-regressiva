@@ -11,34 +11,33 @@
             text-align: center;
             padding-top: 100px;
             font-size: 2em;
-            margin: 0; /* Remove margem padrão do body */
-        }
+            margin: 0; 
 
         .timer {
             margin-top: 40px;
-            display: flex; /* Organiza as linhas (top e bottom) em coluna */
+            display: flex; 
             flex-direction: column;
-            align-items: center; /* Centraliza as linhas horizontalmente */
-            gap: 30px; /* Espaçamento vertical entre a linha de Dias e a linha de Horas/Min/Seg */
+            align-items: center; 
+            gap: 30px; 
         }
-
-        /* Estilos para as linhas do timer para organizar os blocos */
+      }
+        
         .timer-top-row,
         .timer-bottom-row {
             display: flex;
             justify-content: center;
-            gap: 20px; /* Espaçamento horizontal entre os blocos (número + etiqueta) */
+            gap: 20px; 
         }
 
         
         .timer-item {
-            display: flex; /* Faz com que a etiqueta e o número fiquem em coluna */
+            display: flex; 
             flex-direction: column;
-            align-items: center; /* Centraliza o conteúdo horizontalmente */
-            background-color: #2cd5c4; /* Fundo turquesa para todo o bloco */
-            border-radius: 20px; /* Bordas arredondadas para o bloco principal */
-            overflow: hidden; /* Garante que as partes internas respeitem o border-radius */
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.2); /* Sutil sombra para dar profundidade */
+            align-items: center; 
+            background-color: #2cd5c4; 
+            border-radius: 20px;
+            overflow: hidden; 
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2); 
         }
 
         .timer-label-top {
@@ -49,9 +48,9 @@
             font-weight: 700; 
             padding: 5px 15px; 
             width: 100%; 
-            box-sizing: border-box; /* Garante que padding não aumente a largura total */
-            text-transform: uppercase; /* Para deixar as legendas em maiúsculas */
-            text-align: center; /* Centraliza o texto da etiqueta */
+            box-sizing: border-box; 
+            text-transform: uppercase; 
+            text-align: center; 
         }
 
    
@@ -59,7 +58,7 @@
             font-family: 'Comfortaa', cursive; 
             font-weight: 700;
             font-size: 2.0em; 
-            color: #fff; 
+            color: #ffffff; 
             padding: 15px 10px; 
             min-width: 100px; 
             display: flex; 
@@ -114,18 +113,19 @@
 
             if (distance < 0) {
                 clearInterval(interval);
-                // Define todos os campos como "00" ao finalizar a contagem
+              
                 document.getElementById("days").innerText = "00";
                 document.getElementById("hours").innerText = "00";
                 document.getElementById("minutes").innerText = "00";
                 document.getElementById("seconds").innerText = "00";
-                // Opcional: Descomente a linha abaixo se quiser exibir uma mensagem quando a contagem terminar
-                // document.querySelector('.timer').innerHTML = "<p style='color: #333; font-size: 1.5em;'>Contagem Encerrada!</p>";
+            
             }
         }
 
         const interval = setInterval(updateCountdown, 1000);
-        updateCountdown(); // Chama a função imediatamente para evitar delay no primeiro display
+        updateCountdown(); 
     </script>
+    
 </body>
+
 </html>
