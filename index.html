@@ -1,73 +1,134 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet"/>
-  <style>
-    body {
-      font-family: 'Comfortaa', cursive;
-      background-color: #fff;
-      color: #fff;
-      text-align: center;
-      padding-top: 100px;
-      font-size: 2em;
-    }
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Comfortaa', cursive;
+            background-color: #f9f9f9; 
+            color: #333; 
+            text-align: center;
+            padding-top: 100px;
+            font-size: 2em;
+            margin: 0; /* Remove margem padrão do body */
+        }
 
-    .timer {
-      margin-top: 40px;
-      gap: 30px;
-    }
+        .timer {
+            margin-top: 40px;
+            display: flex; /* Organiza as linhas (top e bottom) em coluna */
+            flex-direction: column;
+            align-items: center; /* Centraliza as linhas horizontalmente */
+            gap: 30px; /* Espaçamento vertical entre a linha de Dias e a linha de Horas/Min/Seg */
+        }
 
-    .timer span {
-      font-weight: 700;
-      display: inline-block;
-      min-width: 70px;
-      background-color: #2cd5c4;
-      color: #fff;
-      padding: 15px;
-      margin: 10px;
-      border-radius: 10px;
-    }
-  </style>
+        /* Estilos para as linhas do timer para organizar os blocos */
+        .timer-top-row,
+        .timer-bottom-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Espaçamento horizontal entre os blocos (número + etiqueta) */
+        }
+
+        
+        .timer-item {
+            display: flex; /* Faz com que a etiqueta e o número fiquem em coluna */
+            flex-direction: column;
+            align-items: center; /* Centraliza o conteúdo horizontalmente */
+            background-color: #2cd5c4; /* Fundo turquesa para todo o bloco */
+            border-radius: 20px; /* Bordas arredondadas para o bloco principal */
+            overflow: hidden; /* Garante que as partes internas respeitem o border-radius */
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2); /* Sutil sombra para dar profundidade */
+        }
+
+        /* Estilo da etiqueta na parte superior do bloco */
+        .timer-label-top {
+            font-family: 'Comfortaa', cursive; /* Fonte Comfortaa para a etiqueta */
+            background-color: #f5ac13; /* Cor amarela para a etiqueta */
+            color: #ffffff; /* Cor do texto da etiqueta (branco) */
+            font-size: 0.35em; /* Tamanho da fonte menor que o número */
+            font-weight: 700; /* Negrito para a etiqueta */
+            padding: 5px 15px; /* Padding interno da etiqueta */
+            width: 100%; /* Ocupa toda a largura do .timer-item */
+            box-sizing: border-box; /* Garante que padding não aumente a largura total */
+            text-transform: uppercase; /* Para deixar as legendas em maiúsculas */
+            text-align: center; /* Centraliza o texto da etiqueta */
+        }
+
+        /* Estilo do número principal dentro do bloco (SPAN com id) */
+        .timer-number {
+            font-family: 'Comfortaa', cursive; /* Fonte Comfortaa para os números */
+            font-weight: 700; /* Negrito para os números */
+            font-size: 2.0em; /* Tamanho da fonte do número */
+            color: #fff; /* Cor do número (branco) */
+            padding: 15px 10px; /* Padding para o número, ajustado para o visual */
+            min-width: 100px; /* Largura mínima para o número */
+            display: flex; /* Usado para centralizar o número */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Removido o seletor .timer span que estava causando redundância e potencial confusão */
+        /* O estilo para os spans agora é controlado por .timer-number */
+
+    </style>
 </head>
 <body>
-  <div class="timer">
-    <div class="timer-top-row">
-        <span id="days">00</span>
+    <div class="timer">
+        <div class="timer-top-row">
+            <div class="timer-item">
+                <div class="timer-label-top">Dias</div>
+                <span id="days" class="timer-number">03</span>
+            </div>
+        </div>
+        <div class="timer-bottom-row">
+            <div class="timer-item">
+                <div class="timer-label-top">Horas</div>
+                <span id="hours" class="timer-number">09</span>
+            </div>
+            <div class="timer-item">
+                <div class="timer-label-top">Minutos</div>
+                <span id="minutes" class="timer-number">35</span>
+            </div>
+            <div class="timer-item">
+                <div class="timer-label-top">Segundos</div>
+                <span id="seconds" class="timer-number">31</span>
+            </div>
+        </div>
     </div>
-    <div class="timer-bottom-row">
-        <span id="hours">00</span>
-        <span id="minutes">00</span>
-        <span id="seconds">00</span>
-    </div>
-</div>
 
-  <script>
-    const targetDate = new Date("2025-08-02T00:00:00").getTime();
+    <script>
+      
+        const targetDate = new Date("2025-08-02T00:00:00").getTime(); 
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      document.getElementById("days").innerText = String(days).padStart(2, '0');
-      document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-      document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-      document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+            document.getElementById("days").innerText = String(days).padStart(2, '0');
+            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
 
-      if (distance < 0) {
-        clearInterval(interval);
-        document.querySelector('.timer').innerHTML = "00 00 00 00";
-      }
-    }
+            if (distance < 0) {
+                clearInterval(interval);
+                // Define todos os campos como "00" ao finalizar a contagem
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
+                // Opcional: Descomente a linha abaixo se quiser exibir uma mensagem quando a contagem terminar
+                // document.querySelector('.timer').innerHTML = "<p style='color: #333; font-size: 1.5em;'>Contagem Encerrada!</p>";
+            }
+        }
 
-    const interval = setInterval(updateCountdown, 1000);
-    updateCountdown();
-  </script>
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Chama a função imediatamente para evitar delay no primeiro display
+    </script>
 </body>
 </html>
-
