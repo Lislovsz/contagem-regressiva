@@ -2,72 +2,10 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet"/>
-    <style>
-        body {
-            font-family: 'Comfortaa', cursive;
-            background-color: #fff; 
-            color: #fff; 
-            text-align: center;
-            padding-top: 100px;
-            font-size: 2em;
-            margin: 0; 
-
-        .timer {
-            margin-top: 40px;
-            display: inline-block; 
-            flex-direction: column;
-            align-items: center; 
-            gap: 30px; 
-        }
-      }
-        
-        .timer-top-row,
-        .timer-bottom-row {
-            display: inline-block;
-            justify-content: center;
-            gap: 20px; 
-        }
-
-        
-        .timer-item {
-            display: inline-block; 
-            flex-direction: column;
-            align-items: center; 
-            background-color: #2cd5c4; 
-            border-radius: 20px;
-            overflow: hidden; 
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.2); 
-        }
-
-        .timer-label-top {
-            font-family: 'Comfortaa', cursive; 
-            background-color: #eac43b; 
-            color: #ffffff; 
-            font-size: 0.35em; 
-            font-weight: 700; 
-            padding: 5px 15px; 
-            width: 100%; 
-            box-sizing: border-box; 
-            text-transform: uppercase; 
-            text-align: center; 
-        }
-
-   
-        .timer-number {
-            font-family: 'Comfortaa', cursive; 
-            font-weight: 700;
-            font-size: 2.0em; 
-            color: #ffffff; 
-            padding: 15px 10px; 
-            min-width: 120px; 
-            display: flex; 
-            justify-content: center;
-            align-items: center;
-        }
-
-      
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="timer">
@@ -93,39 +31,6 @@
         </div>
     </div>
 
-    <script>
-      
-        const targetDate = new Date("2025-08-02T00:00:00").getTime(); 
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = String(days).padStart(2, '0');
-            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
-
-            if (distance < 0) {
-                clearInterval(interval);
-              
-                document.getElementById("days").innerText = "00";
-                document.getElementById("hours").innerText = "00";
-                document.getElementById("minutes").innerText = "00";
-                document.getElementById("seconds").innerText = "00";
-            
-            }
-        }
-
-        const interval = setInterval(updateCountdown, 1000);
-        updateCountdown(); 
-    </script>
-    
+    <script src="js/script.js"></script>
 </body>
-
 </html>
